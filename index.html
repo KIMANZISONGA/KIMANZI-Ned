@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; form-action https://formspree.io; img-src 'self' https://files.catbox.moe data:; style-src 'self' 'unsafe-inline';">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KIMANZI — Jouw hospitality agent in Kenia</title>
+  <style>
+    :root { --green:#2C4A34; --orange:#C56428; --sand:#F5E9D1; --cream:#FFF9F0; --ink:#2B2A26; --muted:#5A6270; --radius:14px; --shadow:0 6px 16px rgba(0,0,0,.08); --maxw:1100px; }
+    *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+    body{margin:0;background:var(--sand);color:var(--ink);font-family:system-ui;-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.45;}
+    h1,h2,h3{margin-top:0;color:var(--green);}
+    a{color:var(--green);text-decoration:none;transition:.25s;}
+    a:hover{opacity:.9;}
+    .topnav{position:sticky;top:0;z-index:10;background:var(--cream);border-bottom:1px solid #E3D8BE;}
+    .topnav a{display:inline-block;padding:14px 18px;font-weight:600;color:var(--green);}
+    header{position:relative;overflow:hidden;text-align:center;color:#fff;padding:100px 20px 90px;}
+    .hero-media{position:absolute;inset:0;z-index:0;overflow:hidden;}
+    .hero-media img{width:100%;height:100%;object-fit:cover;filter:brightness(0.9);}
+    header .overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(44,74,52,.80),rgba(44,74,52,.90));}
+    header h1,header p,header .btn{position:relative;z-index:2;}
+    header h1{font-size:clamp(2rem,4vw,3rem);}
+    .opening-note{color:#fff;font-size:1.05rem;margin:8px 0 25px;opacity:.95;}
+    .btn{display:inline-block;padding:12px 26px;border-radius:10px;font-weight:600;cursor:pointer;background:var(--green);color:#fff;box-shadow:var(--shadow);}
+    .btn:hover{background:var(--orange);color:var(--ink);}
+    main{max-width:var(--maxw);margin:0 auto;padding:40px 20px;}
+    section{margin-bottom:80px;}
+    .card{background:var(--cream);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);}
+    .grid{display:grid;gap:24px;}
+    @media(min-width:768px){.grid-2{grid-template-columns:1fr 1fr;}}
+    .maaltijd img{width:100%;max-width:600px;border-radius:var(--radius);box-shadow:var(--shadow);display:block;margin:0 auto;}
+    .cta-section{text-align:center;padding:60px 20px;}
+    .toggle-panel{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+    .toggle-panel.open{max-height:2000px;}
+  </style>
+</head>
+
+<body>
+  <nav class="topnav">
+    <a href="#over">Wie is Kimanzi</a>
+    <a href="#diensten">Diensten</a>
+    <a href="#agenda">Evenementen (volgt)</a>
+    <a href="#intake" data-open="intake">Intake</a>
+    <a href="#contact" data-open="contact">Contact</a>
+  </nav>
+
+  <header>
+    <div class="hero-media"><img src="https://files.catbox.moe/3tviml.jpg" alt=""></div>
+    <div class="overlay"></div>
+    <h1>Kimanzi. Rust, discretie en een zachte landing.</h1>
+    <p class="agent">Jouw hospitality agent staat klaar in Nairobi en Mombasa</p>
+    <p class="tag">Voor gezellig uitgaan in goed gezelschap. Urban Chill.</p>
+    <p class="opening-note">Kimanzi start per 15 januari 2026. We nemen nu intakeverzoeken aan.</p>
+    <a class="btn" data-action="intake">Plan intake →</a>
+  </header>
+
+  <main>
+    <section id="over" class="card">
+      <h2>Wie is Kimanzi?</h2>
+      <p>Kimanzi is jouw hospitality begeleider voor een veilig en authentiek verblijf in Kenia.</p>
+      <p>Vanaf het moment dat je landt staat iemand voor je klaar die de weg kent.</p>
+      <p>Onze hospitality agents laten je kennismaken met het echte Kenia.</p>
+      <p>We werken altijd vanuit vier kernwaarden: discretie, professionaliteit, warmte en veiligheid.</p>
+    </section>
+
+    <section id="diensten" class="card">
+      <h2>Diensten</h2>
+      <div class="grid grid-2">
+        <article>
+          <h3>SOLO — Zachte landing <span style="color:var(--orange)">€ 249</span></h3>
+          <p>Eendaagse begeleiding.<br>Late arrivals na 22.00 uur toeslag € 40.</p>
+        </article>
+
+        <article>
+          <h3>ADVENTURE — Persoonlijke ervaring (3 dagen) <span style="color:var(--orange)">€ 599</span></h3>
+          <p>Drie dagen begeleiding.<br>Late arrivals na 22.00 uur toeslag € 40.<br><strong>Addon:</strong> Extra dag € 95.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="faq" class="card">
+      <h2>FAQ</h2>
+      <div id="faq-panel" class="toggle-panel open">
+        <p>Wij werken één op één.</p>
+        <p>Geen vlucht nodig om intake te doen.</p>
+        <p>Privacy-first. Intake wordt verwijderd na één maand.</p>
+      </div>
+    </section>
+
+    <section id="privacy" class="card"><h2>Privacy</h2><p>Geen cookies. Geen tracking. Geen social.</p></section>
+
+    <section id="intake" class="card"><h2>Intake</h2>
+      <form class="kimanzi-form">
+        <label>Naam</label><input type="text">
+        <label>Telefoon</label><input type="text">
+        <label>E-mail</label><input type="email">
+        <label>Late arrival na 22.00 uur? (toeslag € 40)</label>
+        <select><option>Nee</option><option>Ja</option><option>Nog niet zeker</option></select>
+      </form>
+    </section>
+
+    <section id="contact" class="card"><h2>Contact</h2><p>Discreet contact.</p></section>
+  </main>
+
+  <footer>
+    <p>© KIMANZI — Privacy first. Geen cookies. Geen tracking. Geen social.</p>
+  </footer>
+
+</body>
+</html>
