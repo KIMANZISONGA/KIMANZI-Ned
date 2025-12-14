@@ -49,6 +49,17 @@
     }
     .topnav a:hover { color:var(--orange); }
 
+    /* SIGNAL (alleen in topnav) */
+    .signal-nav{
+      margin-left:8px;
+      font-weight:600;
+      color:#0A7CFF;
+      opacity:.85;
+      padding:14px 12px;
+    }
+    .signal-nav:hover{ opacity:1; color:#0A7CFF; }
+
+
     /* HERO */
     header {
       position:relative;
@@ -232,7 +243,18 @@
       opacity:.88;
       margin:0;
     }
-  </style>
+  
+    /* INLINE IMAGE (safe, no layout shift) */
+    .inline-image{
+      display:block;
+      width:100%;
+      height:auto;
+      margin:18px 0 22px;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+</style>
 </head>
 
 <body>
@@ -243,6 +265,7 @@
     <a href="#meer-weten">Meer weten</a>
     <a href="#intake" data-open="intake">Intake</a>
     <a href="#contact" data-open="contact">Contact</a>
+    <a class="signal-nav" href="https://signal.me/#eu/jPhei3ZTNaLyCCoG10iCMC_kJaZaidg0YUAZWLVzFQpEwDQOSedIC4t7i39jhN7-" target="_blank" rel="noopener" aria-label="Contact via Signal">Signal</a>
   </nav>
 
   <header>
@@ -268,7 +291,9 @@
     <section id="diensten" class="card">
       <h2>Diensten</h2>
 
-      <h3>SOLO — Zachte landing € 249</h3>
+      
+      <img src="happychills.png" alt="Happy chills sfeerbeeld" class="inline-image" loading="lazy" />
+<h3>SOLO — Zachte landing € 249</h3>
       <p>Eendaagse begeleiding: ontvangst, veilig vervoer en rustige oriëntatie. Inclusief lichte maaltijd. Ophaalservice tot dertig kilometer inbegrepen. Daarboven vijftig cent per kilometer. Late aankomst na tien uur in de avond: toeslag veertig euro.</p>
 
       <h3>ADVENTURE — Persoonlijke ervaring € 599</h3>
@@ -282,42 +307,79 @@
       <div class="mw-item">
         <button class="mw-toggle">Voorbereiding</button>
         <div class="mw-panel">
-          <p>Voor Kenia is een gele koorts vaccinatie verplicht. Regel dit op tijd. Controleer ook je paspoort; het moet zes maanden geldig zijn na aankomst.</p>
+          <p>Voor Kenia is een gele koorts vaccinatie verplicht. Regel dit op tijd omdat sommige locaties wachttijden hebben. Controleer ook je paspoort. Het moet bij aankomst nog zes maanden geldig zijn.</p>
+          <p>Veel reizigers nemen een tweede telefoon mee, speciaal voor Kenia. Een toestel met alleen noodzakelijke apps geeft rust en voelt veiliger. Een powerbank maakt je dagen eenvoudiger omdat veel vervoer, communicatie en betalingen via je telefoon lopen.</p>
         </div>
       </div>
 
       <div class="mw-item">
         <button class="mw-toggle">Reisverzekering en zorgverzekering</button>
         <div class="mw-panel">
-          <p>Een reisverzekering met medische dekking geeft rust. Niet alle zorgverzekeringen dekken kosten in het buitenland.</p>
+          <p>Het is verstandig om voor vertrek een reisverzekering af te sluiten met dekking voor medische kosten. Controleer ook je zorgverzekering want niet alle pakketten vergoeden zorg in het buitenland. Een kleine aanvulling kan veel rust geven als er iets gebeurt.</p>
         </div>
       </div>
 
       <div class="mw-item">
         <button class="mw-toggle">Boekingen en vliegvelden</button>
         <div class="mw-panel">
-          <p>Veel gasten vliegen via Düsseldorf of Brussel wegens gunstige prijzen. Je hoeft nog niets geboekt te hebben om een intake te plannen.</p>
+          <p>Veel klanten vliegen graag vanaf Düsseldorf of Brussel omdat de prijzen soms gunstiger zijn. Beide luchthavens zijn het overwegen waard. Je hoeft nog geen vlucht geboekt te hebben om een intake te plannen.</p>
+        </div>
+      </div>
+
+      <div class="mw-item">
+        <button class="mw-toggle">Weer en benodigdheden</button>
+        <div class="mw-panel">
+          <p>Een warme trui of vest is prettig omdat het in de vroege ochtend fris kan zijn, vooral in Nairobi. Tijdens de zomermaanden is een goede muggenspray en een klamboe verstandig om mee te nemen. Je agent kan je helpen met veilige lokale aankopen als dat nodig is.</p>
         </div>
       </div>
 
       <div class="mw-item">
         <button class="mw-toggle">Geldzaken</button>
         <div class="mw-panel">
-          <p>M Pesa is het standaard betaalsysteem in Kenia. Wissel nooit op straat. Je agent helpt je met veilige opties.</p>
+          <p>In Kenia wordt veel betaald met M Pesa, het mobiele betaalsysteem. Je agent helpt je hiermee zodra je bent geland. Cash kan handig zijn maar wissel nooit op straat. Gebruik alleen erkende wisselpunten en laat je agent meekijken als je dat prettig vindt.</p>
+        </div>
+      </div>
+
+      <div class="mw-item">
+        <button class="mw-toggle">Praktische extra’s</button>
+        <div class="mw-panel">
+          <p>Een kleine zaklamp kan prettig zijn omdat niet alles altijd verlicht is. Soms valt de stroom uit. Een powerbank zorgt ervoor dat je bereikbaar blijft voor vervoer, navigatie en contact. Het zijn kleine dingen die je dag veel rustiger maken.</p>
+        </div>
+      </div>
+
+      <div class="mw-item">
+        <button class="mw-toggle">Fooien</button>
+        <div class="mw-panel">
+          <p>In Kenia wordt een fooi vriendelijk ontvangen. Je bent niets verplicht maar een kleine fooi wordt gewaardeerd door chauffeurs, serveersters en andere mensen die je onderweg helpen. Het is een vorm van respect die bij de cultuur hoort.</p>
         </div>
       </div>
 
       <div class="mw-item">
         <button class="mw-toggle">Gedrag en verwachtingen</button>
         <div class="mw-panel">
-          <p>Je agent begeleidt je rustig en persoonlijk. Uitstapjes en persoonlijke kosten zijn voor eigen rekening.</p>
+          <p>Wij gaan zorgvuldig en respectvol met jou om en verwachten dat jij dat ook doet. Je agent begeleidt je alsof je een gewaardeerde gast bent, niet als iemand die iets opeist. Uitstapjes, drankjes en andere persoonlijke uitgaven zijn voor jouw rekening. Het contact blijft vriendelijk, volwassen en wederzijds.</p>
+        </div>
+      </div>
+
+      <div class="mw-item">
+        <button class="mw-toggle">Geen chatbots en geen callcenters</button>
+        <div class="mw-panel">
+          <p>Kimanzi werkt niet met chatbots en niet met callcenters. Geen menu’s, geen wachtrijen en geen scripts. Je stuurt een bericht en wij reageren persoonlijk.</p>
+          <p>Kom je als gast in een situatie terecht waarin je denkt wat nu of je hebt een ongelukje gehad en extra hulp nodig, laat het ons weten. Wij kijken met je mee en doen wat we kunnen om je te helpen. Rustig, discreet en zonder ruis.</p>
         </div>
       </div>
 
       <div class="mw-item">
         <button class="mw-toggle">Onze agent</button>
         <div class="mw-panel">
-          <p>Onze agent is zelfstandig ondernemer. Ze kent de stad, werkt discreet en heeft altijd het recht zich terug te trekken als iets niet veilig voelt.</p>
+          <p>Je agent is een zelfstandig ondernemer. Ze werkt met ons samen maar niet voor ons. Je merkt dat je te maken hebt met iemand die haar vak serieus neemt en die haar stad echt kent. Wij bieden structuur, veiligheid en discretie. Zij brengt persoonlijkheid en lokale kennis.</p>
+        </div>
+      </div>
+
+      <div class="mw-item">
+        <button class="mw-toggle">Veiligheid van onze agent</button>
+        <div class="mw-panel">
+          <p>Onze agent mag zich altijd terugtrekken als zij zich onveilig voelt of niet met respect wordt behandeld. Kimanzi staat volledig achter haar. Jij hebt recht op rust en veiligheid en zij ook. Zo blijft de samenwerking voor iedereen prettig en eerlijk.</p>
         </div>
       </div>
     </section>
