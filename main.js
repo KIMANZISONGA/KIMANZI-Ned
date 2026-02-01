@@ -1,15 +1,26 @@
 (() => {
   "use strict";
 
-  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+  /* ===============================
+     Helpers
+  =============================== */
 
-  function safeScrollIntoView(el) {
+  const $$ = (selector, root = document) =>
+    Array.from(root.querySelectorAll(selector));
+
+  function smoothScroll(el) {
     if (!el) return;
-    try { el.scrollIntoView({ behavior: "smooth", block: "start" }); }
-    catch { el.scrollIntoView(); }
+    try {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch {
+      el.scrollIntoView();
+    }
   }
 
-  /* ---------- Panels ---------- */
+  /* ===============================
+     Panels (intake / contact)
+  =============================== */
+
   function openPanel(name) {
     const panel = document.getElementById(`${name}-panel`);
     if (panel) panel.classList.add("open");
@@ -20,12 +31,12 @@
     if (panel) panel.classList.remove("open");
   }
 
-  function wirePanelTriggers() {
+  function wirePanels() {
     $$("[data-action='intake'], [data-open='intake']").forEach((el) => {
       el.addEventListener("click", (e) => {
         e.preventDefault();
         openPanel("intake");
-        safeScrollIntoView(document.getElementById("intake"));
+        smoothScroll(document.getElementById("intake"));
       });
     });
 
@@ -33,7 +44,7 @@
       el.addEventListener("click", (e) => {
         e.preventDefault();
         openPanel("contact");
-        safeScrollIntoView(document.getElementById("contact"));
+        smoothScroll(document.getElementById("contact"));
       });
     });
 
@@ -46,7 +57,10 @@
     });
   }
 
-  /* ---------- Meer weten accordions ---------- */
+  /* ===============================
+     Accordions (Meer weten)
+  =============================== */
+
   function wireAccordions() {
     $$(".mw-toggle").forEach((btn) => {
       const panel = btn.nextElementSibling;
@@ -54,19 +68,22 @@
 
       btn.addEventListener("click", (e) => {
         e.preventDefault();
+
         const isOpen = panel.classList.contains("open");
-        if (isOpen) {
-          panel.classList.remove("open");
-          return;
-        }
-        $$(".mw-panel.open").forEach((p) => p.classList.remove("open"));
-        panel.classList.add("open");
+        $$(".mw-panel.open").forEach((p) =>
+          p.classList.remove("open")
+        );
+
+        if (!isOpen) panel.classList.add("open");
       });
     });
   }
 
-  /* ---------- Form security helpers ---------- */
-  function ensureHiddenInput(form, name, value = "") {
+  /* ===============================
+     Anti-spam (low key)
+  =============================== */
+
+  function ensureHidden(form, name, value = "") {
     let input = form.querySelector(`input[name='${name}']`);
     if (!input) {
       input = document.createElement("input");
@@ -79,19 +96,19 @@
   }
 
   function addHoneypot(form) {
-    const hpName = "company_website";
-    let hp = form.querySelector(`input[name='${hpName}']`);
+    const name = "company_website";
+    let hp = form.querySelector(`input[name='${name}']`);
     if (hp) return hp;
 
     hp = document.createElement("input");
     hp.type = "text";
-    hp.name = hpName;
+    hp.name = name;
     hp.autocomplete = "off";
     hp.tabIndex = -1;
     hp.setAttribute("aria-hidden", "true");
+
     hp.style.position = "absolute";
     hp.style.left = "-9999px";
-    hp.style.top = "0";
     hp.style.width = "1px";
     hp.style.height = "1px";
     hp.style.opacity = "0";
@@ -100,79 +117,86 @@
     return hp;
   }
 
-  function showThanks(form) {
-    // Koppelen op basis van je hidden formType (klant-intake / klant-contact)
-    const ft = form.querySelector("input[name='formType']")?.value || "";
-    const id = ft.includes("intake") ? "intake-thanks"
-            : ft.includes("contact") ? "contact-thanks"
-            : null;
+  /* ===============================
+     Bedankt tonen
+  =============================== */
 
-    if (id) {
-      const thanks = document.getElementById(id);
-      if (thanks) thanks.style.display = "block";
+  function showThanks(form) {
+    const type = form.querySelector("input[name='formType']")?.value || "";
+
+    let thanksId = null;
+    if (type.includes("intake")) thanksId = "intake-thanks";
+    if (type.includes("contact")) thanksId = "contact-thanks";
+
+    if (thanksId) {
+      const thanks = document.getElementById(thanksId);
+      if (thanks) {
+        thanks.style.display = "block";
+        smoothScroll(thanks);
+      }
     }
 
-    // Form verbergen om dubbele submits te voorkomen
     form.style.display = "none";
   }
 
-  function wireFormsAjax() {
+  /* ===============================
+     Forms (AJAX submit)
+  =============================== */
+
+  function wireForms() {
     $$("form").forEach((form) => {
-      // Time trap
-      const timeField = ensureHiddenInput(form, "form_load_time", "");
+      const timeField = ensureHidden(form, "form_load_time", "");
       timeField.value = String(Date.now());
 
-      // Honeypot
-      const hp = addHoneypot(form);
+      const honeypot = addHoneypot(form);
 
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        // Honeypot filled? -> bot
-        if (hp && typeof hp.value === "string" && hp.value.trim().length > 0) {
-          return false;
+        /* Honeypot gevuld = bot */
+        if (honeypot && honeypot.value.trim().length > 0) {
+          return;
         }
 
-        // Time trap: under 2 seconds -> likely bot
-        const loadedAt = parseInt(timeField.value || "", 10);
-        if (Number.isFinite(loadedAt)) {
-          const elapsed = Date.now() - loadedAt;
-          if (elapsed < 2000) return false;
+        /* Te snel verzonden = bot */
+        const start = parseInt(timeField.value, 10);
+        if (Number.isFinite(start)) {
+          const elapsed = Date.now() - start;
+          if (elapsed < 2000) return;
         }
 
-        // Disable submit button
         const submitBtn = form.querySelector("button[type='submit']");
         if (submitBtn) submitBtn.disabled = true;
 
         try {
-          const formData = new FormData(form);
-
-          // IMPORTANT: we don't rely on _redirect anymore; keep it or remove it—doesn't matter.
-          const res = await fetch(form.action, {
+          const data = new FormData(form);
+          const response = await fetch(form.action, {
             method: form.method || "POST",
-            body: formData,
-            headers: { "Accept": "application/json" }
+            body: data,
+            headers: { Accept: "application/json" }
           });
 
-          if (res.ok) {
+          if (response.ok) {
             showThanks(form);
           } else {
-            // Fallback: re-enable and optionally show a simple message
             if (submitBtn) submitBtn.disabled = false;
-            alert("Er ging iets mis met verzenden. Probeer het nog een keer.");
+            alert("Er ging iets mis met verzenden. Probeer het nogmaals.");
           }
-        } catch {
+        } catch (err) {
           if (submitBtn) submitBtn.disabled = false;
-          alert("Verzenden lukte niet. Check je verbinding en probeer opnieuw.");
+          alert("Verzenden lukte niet. Controleer je verbinding.");
         }
       });
     });
   }
 
-  /* ---------- Init ---------- */
+  /* ===============================
+     Init
+  =============================== */
+
   document.addEventListener("DOMContentLoaded", () => {
-    wirePanelTriggers();
+    wirePanels();
     wireAccordions();
-    wireFormsAjax();
+    wireForms();
   });
 })();
